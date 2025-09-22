@@ -120,6 +120,13 @@ extern "C" fn va_query_config_entrypoints(
     entrypoint_list: *mut VAEntrypoint, // out
     num_entrypoints: *mut c_int,        // out
 ) -> VAStatus {
+    if entrypoint_list.is_null() || !entrypoint_list.is_aligned() {
+        return VaError::InvalidParameter.into();
+    }
+    if num_entrypoints.is_null() || !num_entrypoints.is_aligned() {
+        return VaError::InvalidParameter.into();
+    }
+
     with_driver_context(driver_context, |driver_context| {
         let driver_data = unsafe { DriverData::from_ptr(driver_context.pDriverData)? };
         let (decode, encode) = match profile {
