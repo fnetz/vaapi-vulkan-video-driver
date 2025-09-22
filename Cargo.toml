@@ -1,0 +1,3 @@
+[workspace]
+members = ["va_backend_sys", "va_vulkanvideo"]
+resolver = "3"

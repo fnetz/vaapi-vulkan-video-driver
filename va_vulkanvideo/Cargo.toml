@@ -1,0 +1,21 @@
+[package]
+name = "va_vulkanvideo"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+va_backend_sys = { path = "../va_backend_sys" }
+log = "0.4.28"
+simple_logger = "5.0.0"
+libc = "0.2.175"
+
+[dependencies.ash]
+# see https://github.com/ash-rs/ash/blob/0.38.0/README.md#%EF%B8%8F-semver-compatibility-warning
+version = "=0.38.0"
+# We don't need the `loaded` feature (and libloading) right now, and use
+# `linked` instead
+default-features = false
+features = ["debug", "linked", "std"]
